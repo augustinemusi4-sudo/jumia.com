@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jumia Job Connect • M-Pesa Registration</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f7f9fc 0%, #eef2f6 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .card {
+            max-width: 1000px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(2px);
+        }
+
+        /* Jumia-inspired header */
+        .header {
+            background: #f68b1e; /* Jumia orange */
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            background: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f68b1e;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .logo-text h1 {
+            color: white;
+            font-weight: 700;
+            font-size: 1.6rem;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            color: #ffe6cc;
+            font-weight: 400;
+            font-size: 0.9rem;
+            display: block;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .content {
+            padding: 2rem 2.5rem 2.5rem;
+        }
+
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1.5rem;
+        }
+
+        .hero-left h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1e24;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-left h2 i {
+            color: #f68b1e;
+            margin-right: 0.5rem;
+        }
+
+        .hero-left p {
+            color: #4f5b67;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            max-width: 500px;
+        }
+
+        .price-tag {
+            background: #1a1e24;
+            color: white;
+            padding: 1rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 18px -6px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .price-tag small {
+            font-size: 0.95rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .job-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.25rem;
+            margin: 2rem 0 1.5rem;
+        }
+
+        .job-item {
+            background: #f9fbfd;
+            border-radius: 1.5rem;
+            padding: 1.25rem 1.5rem;
+            border: 1px solid #e6edf4;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: default;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .job-item i {
+            font-size: 1.8rem;
+            color: #f68b1e;
+            width: 2.2rem;
+            text-align: center;
+        }
+
+        .job-item .job-info h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #12171f;
+        }
+
+        .job-item .job-info p {
+            font-size: 0.85rem;
+            color: #6c7a8a;
+            margin-top: 0.2rem;
+        }
+
+        .job-item .job-status {
+            margin-left: auto;
+            background: #e9f2ee;
+            color: #1e7b4c;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            white-space: nowrap;
+        }
+
+        .payment-section {
+            background: #f2f6fc;
+            border-radius: 2rem;
+            padding: 2rem 2rem 1.8rem;
+            margin-top: 1.5rem;
+            border: 1px solid #dde5ef;
+        }
+
+        .payment-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-header i {
+            font-size: 2rem;
+            color: #1e7b4c;
+        }
+
+        .payment-header h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .payment-header span {
+            background: #e6f0ea;
+            color: #1e7b4c;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            margin-left: 0.5rem;
+        }
+
+        .mpesa-form {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            gap: 1.2rem;
+        }
+
+        .input-group {
+            flex: 1 1 240px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #2d3a48;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .input-group label i {
+            color: #f68b1e;
+        }
+
+        .input-group input {
+            padding: 1rem 1.2rem;
+            border-radius: 60px;
+            border: 2px solid #d0ddee;
+            font-size: 1rem;
+            background: white;
+            transition: 0.15s;
+            font-weight: 500;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #f68b1e;
+            box-shadow: 0 0 0 4px rgba(246, 139, 30, 0.15);
+        }
+
+        .btn-pay {
+            background: #f68b1e;
+            border: none;
+            color: white;
+            font-weight: 700;
+            padding: 1rem 2.2rem;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: all 0.15s;
+            box-shadow: 0 10px 20px -8px rgba(246, 139, 30, 0.5);
+            border: 1px solid rgba(255,255,255,0.2);
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            flex: 1 0 auto;
+        }
+
+        .btn-pay i {
+            font-size: 1.2rem;
+        }
+
+        .btn-pay:hover {
+            background: #e07b14;
+            transform: scale(1.02);
+            box-shadow: 0 14px 24px -8px rgba(246, 139, 30, 0.7);
+        }
+
+        .btn-pay:active {
+            transform: scale(0.98);
+            background: #c96d0f;
+        }
+
+        .btn-pay:disabled {
+            background: #b0b8c2;
+            box-shadow: none;
+            transform: none;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .message-box {
+            margin-top: 1.5rem;
+            padding: 1rem 1.5rem;
+            border-radius: 60px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #ffffff;
+            border-left: 5px solid #f68b1e;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: 0.2s;
+            min-height: 3.5rem;
+        }
+
+        .message-box i {
+            font-size: 1.3rem;
+        }
+
+        .message-box.success {
+            border-left-color: #1e7b4c;
+            background: #f1f9f5;
+        }
+
+        .message-box.error {
+            border-left-color: #d63939;
+            background: #fef5f5;
+        }
+
+        .message-box.info {
+            border-left-color: #f68b1e;
+        }
+
+        .footer-note {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.8rem;
+            font-size: 0.85rem;
+            color: #6f7d8c;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #edf3f9;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        .secure-badge i {
+            color: #1e7b4c;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #ccdae9, transparent);
+            margin: 1.2rem 0 0.8rem;
+        }
+
+        /* disabled state for inputs while processing */
+        .processing {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                padding: 1.5rem;
+            }
+            .header {
+                padding: 1.2rem 1.5rem;
+            }
+            .hero-left h2 {
+                font-size: 1.6rem;
+            }
+            .price-tag {
+                font-size: 1.2rem;
+                padding: 0.8rem 1.3rem;
+            }
+            .payment-section {
+                padding: 1.5rem;
+            }
+            .btn-pay {
+                width: 100%;
+                padding: 1rem;
+            }
+            .job-item .job-status {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- Header with Jumia styling -->
+        <div class="header">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Jumia Job Connect</h1>
+                    <span>Official career network</span>
+                </div>
+            </div>
+            <div class="badge">
+                <i class="fas fa-shield-alt" style="margin-right: 6px;"></i> Verified opportunities
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="content">
+            <div class="hero">
+                <div class="hero-left">
+                    <h2><i class="fas fa-link"></i> Connect. Work. Earn.</h2>
+                    <p>Get matched with 500+ Jumia vendors, logistics & support roles. One-time connection fee.</p>
+                </div>
+                <div class="price-tag">
+                    <i class="fas fa-tag"></i> KES 100 <small>/ connection</small>
+                </div>
+            </div>
+
+            <!-- Job listings preview (working buttons? they are static here, but visually interactive) -->
+            <div class="job-grid">
+                <div class="job-item">
+                    <i class="fas fa-box"></i>
+                    <div class="job-info">
+                        <h4>Warehouse Associate</h4>
+                        <p>Nairobi • Full-time</p>
+                    </div>
+                    <div class="job-status">Hiring</div>
+                </div>
+                <div class="job-item">
+                    <i class="fas fa-motorcycle"></i>
+                    <div class="job-info">
+                        <h4>Delivery Rider</h4>
+                        <p>Mombasa • Flexible</p>
+                    </div>
+                    <div class="job-status">Urgent</div>
+                </div>
+                <div class="job-item">
+                    <i class="fas fa-headset"></i>
+                    <div class="job-info">
+                        <h4>Customer Care</h4>
+                        <p>Remote • Shifts</p>
+                    </div>
+                    <div class="job-status">New</div>
+                </div>
+                <div class="job-item">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="job-info">
+                        <h4>Sales Associate</h4>
+                        <p>Kisumu • Commission</p>
+                    </div>
+                    <div class="job-status">Hiring</div>
+                </div>
+            </div>
+
+            <!-- Payment section with M-Pesa prompt -->
+            <div class="payment-section">
+                <div class="payment-header">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>M-Pesa STK Push</h3>
+                    <span>Secure</span>
+                </div>
+
+                <div class="mpesa-form" id="mpesaForm">
+                    <div class="input-group">
+                        <label><i class="fas fa-phone"></i> Phone number (M-Pesa)</label>
+                        <input type="tel" id="phoneNumber" placeholder="2547XXXXXXXX" value="254712345678" maxlength="12">
+                    </div>
+                    <button class="btn-pay" id="payBtn">
+                        <i class="fas fa-bolt"></i> Pay KES 100 & Connect
+                    </button>
+                </div>
+
+                <!-- Message box for prompt / status -->
+                <div class="message-box info" id="messageBox">
+                    <i class="fas fa-info-circle"></i>
+                    <span id="messageText">Enter your M-Pesa number and click to receive STK push.</span>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="footer-note">
+                    <div class="secure-badge">
+                        <i class="fas fa-lock"></i> Secure M-Pesa prompt
+                    </div>
+                    <div>
+                        <i class="fas fa-check-circle" style="color:#1e7b4c;"></i> One-time fee • Instant connection
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // DOM elements
+            const payBtn = document.getElementById('payBtn');
+            const phoneInput = document.getElementById('phoneNumber');
+            const messageBox = document.getElementById('messageBox');
+            const messageText = document.getElementById('messageText');
+            const mpesaForm = document.getElementById('mpesaForm');
+            
+            // Simulate M-Pesa STK push states
+            let isProcessing = false;
+            let promptTimer = null;
+
+            // Helper: update message box with type
+            function setMessage(text, type = 'info', icon = null) {
+                messageText.textContent = text;
+                messageBox.className = `message-box ${type}`;
+                
+                // set icon according to type
+                let iconClass = 'fa-info-circle';
+                if (type === 'success') iconClass = 'fa-check-circle';
+                else if (type === 'error') iconClass = 'fa-exclamation-triangle';
+                else if (type === 'info') iconClass = 'fa-info-circle';
+                
+                // replace the icon (the first i element)
+                const iconEl = messageBox.querySelector('i');
+                if (iconEl) {
+                    iconEl.className = `fas ${iconClass}`;
+                }
+            }
+
+            // Validate phone number (Kenyan format, accepts 07.., 01.., 2547..)
+            function validatePhone(phone) {
+                // Remove spaces, hyphens
+                let cleaned = phone.replace(/[\s\-\(\)]/g, '');
+                // If starts with +254 -> strip plus
+                if (cleaned.startsWith('+254')) cleaned = cleaned.substring(1);
+                // Accept 2547..., 2541..., 07..., 01...
+                if (/^254(7|1)\d{8}$/.test(cleaned)) {
+                    return { valid: true, normalized: cleaned };
+                }
+                if (/^0(7|1)\d{8}$/.test(cleaned)) {
+                    // convert to 254 format
+                    return { valid: true, normalized: '254' + cleaned.substring(1) };
+                }
+                // also allow 7... / 1... (9 digits after? but be strict)
+                if (/^[71]\d{8}$/.test(cleaned)) {
+                    return { valid: true, normalized: '254' + cleaned };
+                }
+                return { valid: false, normalized: null };
+            }
+
+            // Reset processing state and UI
+            function setProcessing(state) {
+                isProcessing = state;
+                if (state) {
+                    payBtn.disabled = true;
+                    payBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Processing...';
+                    mpesaForm.classList.add('processing');
+                } else {
+                    payBtn.disabled = false;
+                    payBtn.innerHTML = '<i class="fas fa-bolt"></i> Pay KES 100 & Connect';
+                    mpesaForm.classList.remove('processing');
+                }
+            }
+
+            // Simulate STK Push (M-Pesa prompt)
+            function initiateMpesaPrompt(phoneNumber) {
+                if (isProcessing) return;
+                
+                // validate again
+                const validation = validatePhone(phoneNumber);
+                if (!validation.valid) {
+                    setMessage('❌ Please enter a valid M-Pesa number (e.g., 254712345678 or 0712345678)', 'error');
+                    return;
+                }
+
+                const normalizedPhone = validation.normalized;
+                // Display masked phone in message
+                const displayPhone = normalizedPhone.slice(0, 4) + '****' + normalizedPhone.slice(-4);
+
+                // set processing UI
+                setProcessing(true);
+                
+                // Clear any previous timers
+                if (promptTimer) clearTimeout(promptTimer);
+
+                // Step 1: STK push sent
+                setMessage(`📲 M-Pesa STK push sent to ${displayPhone}. Check your phone for the prompt.`, 'info');
+
+                // Simulate user waiting / entering PIN (3 seconds)
+                promptTimer = setTimeout(() => {
+                    // 80% chance success (simulate realistic success)
+                    const isSuccess = Math.random() < 0.8;
+                    
+                    if (isSuccess) {
+                        setMessage(`✅ Payment of KES 100 received! Job connection unlocked. You will receive a confirmation SMS shortly.`, 'success');
+                        // Optionally: update UI to "connected" state
+                        payBtn.innerHTML = '<i class="fas fa-check-circle"></i> Connected!';
+                        payBtn.disabled = true;  // keep disabled after success
+                        mpesaForm.classList.add('processing'); // keep disabled style but no spinner
+                        // enable phone? we leave disabled, but user can refresh.
+                    } else {
+                        // Failure case: cancel, timeout, insufficient funds
+                        setMessage(`⚠️ M-Pesa prompt cancelled or failed. Please try again.`, 'error');
+                        // reset button
+                        setProcessing(false);
+                        // keep phone input enabled
+                    }
+                }, 2800); // 2.8 seconds feels like waiting for PIN
+            }
+
+            // Event listener for pay button
+            payBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (isProcessing) return;
+                
+                const rawPhone = phoneInput.value.trim();
+                if (!rawPhone) {
+                    setMessage('Please enter your M-Pesa phone number.', 'error');
+                    return;
+                }
+                initiateMpesaPrompt(rawPhone);
+            });
+
+            // Also allow pressing Enter on the phone input (but focus on pay button)
+            phoneInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (!isProcessing) payBtn.click();
+                }
+            });
+
+            // Clean up any running timer on page unload (just in case)
+            window.addEventListener('beforeunload', function() {
+                if (promptTimer) clearTimeout(promptTimer);
+            });
+
+            // Set initial placeholder formatting
+            phoneInput.addEventListener('blur', function() {
+                let val = this.value.trim();
+                if (!val) return;
+                // Auto-format if it's 07.. to 2547..
+                if (/^0[71]\d{8}$/.test(val)) {
+                    this.value = '254' + val.substring(1);
+                } else if (/^[71]\d{8}$/.test(val)) {
+                    this.value = '254' + val;
+                }
+            });
+
+            // On page load, set a friendly default if empty? default value already given, but keep.
+            // For demonstration, we already have default value 254712345678
+        })();
+    </script>
+
+    <!-- small extra style for spinner alignment -->
+    <style>
+        .fa-pulse {
+            animation: fa-spin 1s infinite steps(8);
+        }
+        @keyframes fa-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .btn-pay:disabled {
+            background: #b0b8c2;
+            box-shadow: none;
+            transform: none;
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+        .message-box.success i,
+        .message-box.error i,
+        .message-box.info i {
+            color: inherit;
+        }
+        .message-box.success {
+            border-left-color: #1e7b4c;
+            background: #f1f9f5;
+            color: #0d4a2b;
+        }
+        .message-box.error {
+            border-left-color: #d63939;
+            background: #fef5f5;
+            color: #a12a2a;
+        }
+        .message-box.info {
+            border-left-color: #f68b1e;
+            background: #fff8f0;
+            color: #754a1a;
+        }
+        .job-item {
+            transition: 0.2s;
+        }
+        .job-item:hover {
+            background: white;
+            box-shadow: 0 12px 20px -12px rgba(0,0,0,0.15);
+            border-color: #f68b1e40;
+            transform: translateY(-2px);
+        }
+    </style>
+</body>
+</html>
